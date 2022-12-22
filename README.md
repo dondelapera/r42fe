@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Requirements
 
-## Getting Started
+- node v18.12
+- yarn
+- next.js
+- .env (environment variables)
+- r42be - Back-end API for this application (the nest.js application)
 
-First, run the development server:
+## Environment variables
+
+- **NEXT_PUBLIC_API_BASE_URL** - Application back-end API base URL
+- **NEXT_PUBLIC_STRAVA_OAUTH_REDIRECT_URL** - Redirect URL on front-end (e.g )
+- **NEXT_PUBLIC_STRAVA_CLIENT_ID** - Application strava client Id
 
 ```bash
-npm run dev
-# or
-yarn dev
+# EXAMPLE (.env file in the project root)
+
+# Back-end API BASE_URL
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3001
+
+# Front-end expected redirect URL to be called by strava API (callback URL)
+NEXT_PUBLIC_STRAVA_OAUTH_REDIRECT_URL=http://localhost:3000/auth
+
+# Strava application API client ID
+NEXT_PUBLIC_STRAVA_CLIENT_ID=111111
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Up and Running
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+# Running it in development mode
+yarn dev
 
-## Learn More
+# Running it in production mode
+yarn build
+yarn start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Up and Running (Using Docker)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Create the docker image
+docker build -t r42/r42fe:1.0 .
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Create the container and run it
+docker run -p 3000:3000 r42/r42fe:1.0
+```
